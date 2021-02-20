@@ -1,12 +1,17 @@
 package pl.mrfisherman.music_voter.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "SONGS")
 public class Song {
 
     @Id
@@ -14,25 +19,43 @@ public class Song {
     private long id;
 
     private String title;
-
-    @ManyToMany
-    @JoinTable(name = "song_authors",
-            joinColumns = {@JoinColumn(name = "song_id",
-                    insertable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "author_id",
-                    insertable = false, updatable = false)})
-    private Set<Author> authors;
-
-    @ManyToMany
-    @JoinTable(name = "song_discs",
-            joinColumns = {@JoinColumn(name = "song_id",
-                    insertable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "disc_id",
-                    insertable = false, updatable = false)})
-    private Set<Disc> discs;
-
+    //TODO another entity Author in relation @ManyToMany
+    private String author;
+    //TODO another entity Album in relation @ManyToMany
+    private String album;
     private Category category;
-
-    //in bigger application this should be also another entity in relation @OneToMany
+    //TODO another entity Vote in relation @OneToMany
     private int votes;
+
+    public Song(String title, String author, String album, Category category, int votes) {
+        this.title = title;
+        this.author = author;
+        this.album = album;
+        this.category = category;
+        this.votes = votes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Song song = (Song) o;
+        return Objects.equals(title, song.title) && Objects.equals(author, song.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author);
+    }
+
+    @Override
+    public String toString() {
+        return "\nSong{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", album='" + album + '\'' +
+                ", category=" + category +
+                ", votes=" + votes +
+                '}';
+    }
 }
