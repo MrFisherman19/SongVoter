@@ -19,6 +19,6 @@ public class SongReport extends Report {
     @Override
     public String toString() {
         return super.toString() + "\n" +
-                "SongReport{" + "songs=" + songs + '}';
+                "SongReport{" + "songs=" + songs + '}' + "\n";
     }
 }

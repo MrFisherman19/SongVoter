@@ -16,6 +16,7 @@
     <properties>
         <java.version>11</java.version>
         <commons-csv.version>1.8</commons-csv.version>
+        <xstream.version>1.4.15</xstream.version>
     </properties>
     <dependencies>
         <dependency>
@@ -37,6 +38,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>${xstream.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

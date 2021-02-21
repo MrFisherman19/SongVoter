@@ -1,23 +1,27 @@
 package pl.mrfisherman.music_voter.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.mrfisherman.music_voter.model.pojo.report.CategoriesReport;
 import pl.mrfisherman.music_voter.model.pojo.report.Report;
 import pl.mrfisherman.music_voter.model.pojo.report.ReportType;
-import pl.mrfisherman.music_voter.model.pojo.report.CategoriesReport;
 import pl.mrfisherman.music_voter.model.pojo.report.SongReport;
+import pl.mrfisherman.music_voter.service.file.SongFileManager;
+
+import java.nio.file.Path;
+import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class ReportServiceImpl implements ReportService {
 
     private final SongService songService;
-
-    public ReportServiceImpl(SongService songService) {
-        this.songService = songService;
-    }
+    private final SongFileManager songFileManager;
 
     @Override
-    public void generateReportToFile(ReportType reportType) {
-
+    public Path generateReportToFile(ReportType reportType, ReportExtension extension) {
+        final String nameOfReport = reportType.toString() + UUID.randomUUID();
+        return songFileManager.saveReportToFile(generateReport(reportType), nameOfReport, extension.toString());
     }
 
     @Override
@@ -45,6 +49,4 @@ public class ReportServiceImpl implements ReportService {
     private String createName(ReportType reportType) {
         return String.format("---- REPORT Type: %s ----", reportType);
     }
-
-
 }

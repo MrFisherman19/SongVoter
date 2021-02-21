@@ -7,11 +7,22 @@ import java.util.List;
 
 public interface SongService {
 
-    void addSong(Song song);
+    Song findSongByTitle(String title);
+
+    void saveSong(Song song);
 
     List<Song> getSongsSortedByVotesWithLimit(int limit);
 
     List<Song> getAllSongsSortedByVotes();
 
     List<CategoryReportStats> getAllWithCountingCategoryVotes();
+
+    void saveSongs(List<Song> songs);
+
+    void voteForSongByTitle(String nextLineFromUser);
+
+    void clearVotesForSongByTitle(String nextLineFromUser);
+
+    void clearVotesForEverySong();
+
 }

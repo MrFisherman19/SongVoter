@@ -2,6 +2,7 @@ package pl.mrfisherman.music_voter.service.file;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Component;
 import pl.mrfisherman.music_voter.model.Category;
@@ -16,10 +17,10 @@ import java.util.List;
 import java.util.Locale;
 
 @Component
-public class CSVSongParser implements SongParser {
+public class CsvParser implements SongParser {
 
     @Override
-    public List<Song> saveSongsFromPath(Path path) {
+    public List<Song> parseSongsFromPath(Path path) {
         final List<Song> songs = new ArrayList<>();
         try (Reader reader = Files.newBufferedReader(path);
              CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT

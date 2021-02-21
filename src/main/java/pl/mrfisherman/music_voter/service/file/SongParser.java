@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface SongParser {
 
-    List<Song> saveSongsFromPath(Path path);
+    List<Song> parseSongsFromPath(Path path);
 }

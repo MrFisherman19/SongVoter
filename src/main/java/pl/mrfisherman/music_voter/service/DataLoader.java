@@ -19,27 +19,27 @@ public class DataLoader implements ApplicationListener<ApplicationReadyEvent> {
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-        songService.addSong(
+        songService.saveSong(
                 new Song("Very bad song",
                         "Author 1",
                         "Disc 1",
                         Category.POP, 20));
-        songService.addSong(
+        songService.saveSong(
                 new Song("Very ok song",
                         "Author 2",
                         "Disc 3",
                         Category.ROCK, 50));
-        songService.addSong(
+        songService.saveSong(
                 new Song("Very good song",
                         "Author 3",
                         "Disc 3",
                         Category.METAL, 100));
-        songService.addSong(
+        songService.saveSong(
                 new Song("Very good song",
                         "Author 4",
                         "Disc 3",
                         Category.METAL, 120));
-        songService.addSong(
+        songService.saveSong(
                 new Song("Very good song",
                         "Author 5",
                         "Disc 3",

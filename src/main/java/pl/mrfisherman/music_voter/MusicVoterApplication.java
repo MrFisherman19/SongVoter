@@ -1,31 +1,24 @@
 package pl.mrfisherman.music_voter;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pl.mrfisherman.music_voter.controller.ConsoleMenuFacade;
-import pl.mrfisherman.music_voter.service.file.FileManager;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import pl.mrfisherman.music_voter.controller.ConsoleMenu;
+
+import java.util.Scanner;
 
 @SpringBootApplication
-public class MusicVoterApplication implements CommandLineRunner {
-
-    private final ConsoleMenuFacade consoleMenuFacade;
-    private final FileManager fileManager;
-
-    public MusicVoterApplication(ConsoleMenuFacade consoleMenuFacade, FileManager fileManager) {
-        this.consoleMenuFacade = consoleMenuFacade;
-        this.fileManager = fileManager;
-    }
+public class MusicVoterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MusicVoterApplication.class, args);
+        final ConfigurableApplicationContext run = SpringApplication.run(MusicVoterApplication.class, args);
+        final ConsoleMenu consoleMenu = (ConsoleMenu) run.getBean("consoleMenu");
+        consoleMenu.run(args);
     }
 
-    @Override
-    public void run(String... args) {
-        consoleMenuFacade.printLoadedFilesOnConsole(fileManager.extractSongsFilesAndSave(args).toString());
-
-
+    @Bean
+    public Scanner getScanner() {
+        return new Scanner(System.in);
     }
-
 }

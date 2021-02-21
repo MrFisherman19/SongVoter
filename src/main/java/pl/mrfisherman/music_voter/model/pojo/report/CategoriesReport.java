@@ -1,12 +1,16 @@
 package pl.mrfisherman.music_voter.model.pojo.report;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
 public class CategoriesReport extends Report {
 
     private final List<CategoryReportStats> categoriesStats;
+
     public CategoriesReport(String title, List<CategoryReportStats> categoriesStats) {
         super(title);
         this.categoriesStats = new ArrayList<>(categoriesStats);
@@ -19,7 +23,7 @@ public class CategoriesReport extends Report {
                         "Category: " + categoryStats.getCategoryName() + "\n" +
                                 "Votes in category: " + categoryStats.getSummaryVotes() + "\n" +
                                 "Songs in category: " + categoryStats.getSongsInCategory().size() + "\n" +
-                                "Songs list sorted by votes: " + categoryStats.getSongsInCategory())
+                                "Songs list sorted by votes: " + categoryStats.getSongsInCategory() + "\n")
                 .collect(Collectors.joining("\n"));
     }
 }
